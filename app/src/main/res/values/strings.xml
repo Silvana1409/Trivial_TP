@@ -1,6 +1,4 @@
-<!--
-    Auteur : Silvana Esquivel H.
-    Annéé : 2022-2023 -->
+<!-- Auteur :Silvana Esquivel -->
 <resources>
     <string name="app_name">Android Trivia</string>
     <string name="game_over">Game Over</string>

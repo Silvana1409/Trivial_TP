@@ -1,9 +1,6 @@
-<!--
-    Auteur : Silvana Esquivel H.
-    Annéé : 2022-2023
-   -->
-
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Auteur :Silvana Esquivel -->
+
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
