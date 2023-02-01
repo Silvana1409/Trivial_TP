@@ -27,9 +27,14 @@ class TitleFragment : Fragment() {
       // binding.playButton.setOnClickListener{view : View ->
           // Navigation.findNavController(view).navigate(R.id.action_titleFragment_to_gameFragment)  }
         //code plus simple, navigation peut créer :
-        binding.playButton.setOnClickListener(
-            Navigation.createNavigateOnClickListener(R.id.action_titleFragment_to_gameFragment)
-        )
+       // binding.playButton.setOnClickListener(
+           // Navigation.createNavigateOnClickListener(R.id.action_titleFragment_to_gameFragment)
+        //)
+
+        //Remplacment id navigation par id action
+        binding.playButton.setOnClickListener{ v : View ->
+            v.findNavController().navigate(TitleFragmentDirections.actionTitleFragmentToGameFragment())
+        }
 
         //pour dire q' nous avons un Menu associé au TitleFragm..
         setHasOptionsMenu(true)
