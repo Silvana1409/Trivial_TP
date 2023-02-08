@@ -10,6 +10,8 @@ import android.text.Layout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
@@ -29,6 +31,15 @@ class MainActivity : AppCompatActivity() {
 
         //inclure comme 3eme parametre la disposition du drawerLyout
         NavigationUI.setupActionBarWithNavController(this,navController,drawerLayout)
+
+        // pour q la barre de gauche soit juste au départ
+        navController.addOnDestinationChangedListener{ nc: NavController, nd: NavDestination, args: Bundle?->
+            if (nd.id == nc.graph.startDestination){
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+            }else{
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+            }
+        }
 
         appBarConfiguration=AppBarConfiguration(navController.graph,drawerLayout)
 
