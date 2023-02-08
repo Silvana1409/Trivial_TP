@@ -9,6 +9,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.core.app.ShareCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -39,6 +40,12 @@ class GameWonFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater?.inflate(R.menu.winner_menu,menu)
+
+        //vérifie si lactivité est résolu
+        if (null == getShareIntent().resolveActivity(activity!!.packageManager)){
+            //hide the menu item if it doesn't resolve
+            menu?.findItem(R.id.share)?.setVisible(false)
+        }
     }
     //méthode pour l'intention partage
     private fun getShareIntent(): Intent{
@@ -47,13 +54,26 @@ class GameWonFragment : Fragment() {
         //nvelle intention implicite de partage
         val shareIntent = Intent(Intent.ACTION_SEND)
         //Type de données q on va partager
-        shareIntent.setType("text/plain")
-            .putExtra(Intent.EXTRA_TEXT,
-                getString(R.string.share_success_text,args.numCorrect,args.numQuestions))
+       // shareIntent.setType("text/plain")
+         //   .putExtra(Intent.EXTRA_TEXT,
+           //     getString(R.string.share_success_text,args.numCorrect,args.numQuestions))
 
-        return shareIntent
+       // return shareIntent
+
+           // shareIntent.setType("text/plain")
+           // .putExtra(Intent.EXTRA_TEXT,getString(R.string.share_success_text,args.numCorrect,args.numQuestions))
+        return ShareCompat.IntentBuilder.from(activity!!)
+            .setText(getString(R.string.share_success_text,args.numCorrect,args.numQuestions))
+            //on met en commentaire pour ne pas afficher l'icone du partage
+            // .setType("text/plain")
+            .intent
+
+
+          //  return shareIntent
 
     }
+
+
     //méthode supp pour réaliser le partage
     private fun shareSucces(){
         //démarre l'activité avec l'intention qui démarre notre nvll intention
